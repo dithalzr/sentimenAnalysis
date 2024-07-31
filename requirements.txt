@@ -9,3 +9,5 @@ streamlit
 Sastrawi
 scikit-learn
 transformers
+imbalanced-learn
+gensim

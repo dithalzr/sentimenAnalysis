@@ -1,1 +1,1 @@
-pip install matplotlib pandas wordcloud seaborn regex nltk keras streamlit Sastrawi scikit-learn transformers
+pip install matplotlib pandas wordcloud seaborn regex nltk keras streamlit Sastrawi scikit-learn transformers imbalanced-learn gensim
