@@ -1,0 +1,11 @@
+matplotlib
+pandas
+wordcloud
+seaborn
+regex
+nltk
+keras
+streamlit
+Sastrawi
+scikit-learn
+transformers
