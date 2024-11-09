@@ -11,3 +11,4 @@ scikit-learn
 transformers
 imbalanced-learn
 gensim
+openpyxl
