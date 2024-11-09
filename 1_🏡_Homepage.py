@@ -5,6 +5,7 @@ from gensim.models import Word2Vec
 import pandas as pd
 import numpy as np
 import warnings
+import openpyxl
 warnings.filterwarnings('ignore')
 
 # Visualization libraries
