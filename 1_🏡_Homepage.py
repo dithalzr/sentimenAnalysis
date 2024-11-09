@@ -118,7 +118,7 @@ if uploaded_file is not None:
     df['review'] = df['review'].apply(lambda x: word_tokenize(x))
     
     # Train Word2Vec model with skip-gram
-    word2vec_model = Word2Vec(sentences=df['review'], size=100, window=5, min_count=1, sg=1)
+    word2vec_model = Word2Vec(sentences=df['review'], vector_size=100, window=5, min_count=1, sg=1)
 
     # Convert words to vectors
     def vectorize_text(text):
