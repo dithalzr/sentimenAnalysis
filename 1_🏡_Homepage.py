@@ -134,35 +134,32 @@ if uploaded_file is not None:
 
     df['review_vector'] = df['review'].apply(vectorize_text)
 
-    # Prepare data for model
-    X = np.array(df['review_vector'].tolist())
-    y = df['sentiment']
+    if 'sentiment' in df.columns:
+        # Prepare data for SVM model
+        X = np.array(df['review_vector'].tolist())
+        y = df['sentiment']
 
-    # Apply SMOTE to the data
-    smote = SMOTE(random_state=42)
-    X_smote, y_smote = smote.fit_resample(X, y)
+        smote = SMOTE(random_state=42)
+        X_smote, y_smote = smote.fit_resample(X, y)
 
-    # Train SVM with RBF kernel
-    svm_model = SVC(kernel='rbf', random_state=42, probability=True)
-    svm_model.fit(X_smote, y_smote)
+        svm_model = SVC(kernel='rbf', random_state=42, probability=True)
+        svm_model.fit(X_smote, y_smote)
 
-    # Predict sentiments for all reviews
-    df['predicted_sentiment'] = svm_model.predict(X)
+        df['predicted_sentiment'] = svm_model.predict(X)
 
-    st.title("Analysis Result")
+        st.title("Analysis Result")
+        st.dataframe(df[['review', 'predicted_sentiment']], use_container_width=True)
 
-    # Display the dataframe with the new sentiment column
-    st.dataframe(df[['review', 'predicted_sentiment']], use_container_width=True)
-
-    # Save the dataframe with the new column to a CSV file
-    df.to_csv("predicted_sentiments.csv", index=False)
-    with open("predicted_sentiments.csv", "rb") as file:
-        st.download_button(
-            label="Download the result CSV",
-            data=file,
-            file_name="predicted_sentiments.csv",
-            mime="text/csv"
-        )
+        df.to_csv("predicted_sentiments.csv", index=False)
+        with open("predicted_sentiments.csv", "rb") as file:
+            st.download_button(
+                label="Download the result CSV",
+                data=file,
+                file_name="predicted_sentiments.csv",
+                mime="text/csv"
+            )
+    else:
+        st.error("The uploaded file must contain a 'sentiment' column.")
 
     # HTML for top bar
     top_bar = """
